@@ -15,14 +15,15 @@ type group  struct{
 }
 
 type bartender  struct {
-	serving *pubgoer
+	serving pubgoer
 }
 
 type pub  struct {
-	groups []*group
+	groups []group
+	bartenders []bartender
 }
 
-func main (){	
+func main (){
 	fmt.Println("Let's simulate a bar")
 
 
@@ -30,12 +31,26 @@ func main (){
 	// point everyone's drink level starts dropping,
 	// When the person whose turn it is to buy a round has his drink level drop to zero
 	// they offer to buy a round for everyone else,
-	// At this point everyone whose glass isn't too full (0.2?) accepts, an order is generated and he goes
-	// on the bar queue
+	// At this point everyone whose glass isn't too full (0.2?) accepts,
+	// an order is generated and goes on the bar queue for a bartender to process when they're
+	// available
 
-	//make a group:#
+	//make a group:
 	pubgoers := make([]pubgoer, 10)
 	for i:= 0; i < 10; i++ {
 		pubgoers[i] = pubgoer{1.0, rand.Float32()}
 	}
+
+	new_group := group{pubgoers,0}
+	fmt.Println(new_group)
+
+
+	// make some bartenders
+	bartenders := make([]bartender, 3, 10)
+	for i := 0; i < 3; i++ {
+		bartenders[i] = bartender{}
+	}
+	// now make a pub
+	new_pub := pub{[]group{new_group}, bartenders}
+	fmt.Println(new_pub)
 }
