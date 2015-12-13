@@ -1,6 +1,8 @@
 package main
 
 import "fmt"
+import "math/rand"
+
 
 type pubgoer  struct{
 	drinklevel float32
@@ -31,6 +33,9 @@ func main (){
 	// At this point everyone whose glass isn't too full (0.2?) accepts, an order is generated and he goes
 	// on the bar queue
 
-	
-	var new_pub pub
+	//make a group:#
+	pubgoers := make([]pubgoer, 10)
+	for i:= 0; i < 10; i++ {
+		pubgoers[i] = pubgoer{1.0, rand.Float32()}
+	}
 }
