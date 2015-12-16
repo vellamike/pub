@@ -23,6 +23,10 @@ type pub  struct {
 	bartenders []bartender
 }
 
+func (this *pubgoer) sip() {
+	this.drinklevel = this.drinklevel - this.drinkspeed
+}
+
 func main (){
 	fmt.Println("Let's simulate a bar")
 
@@ -53,4 +57,9 @@ func main (){
 	// now make a pub
 	new_pub := pub{[]group{new_group}, bartenders}
 	fmt.Println(new_pub)
+
+	drinker := pubgoer{0.9, 0.2}
+	fmt.Println(drinker.drinklevel)
+	drinker.sip()
+	fmt.Println(drinker.drinklevel)
 }
