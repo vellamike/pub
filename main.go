@@ -27,10 +27,14 @@ func (this *pubgoer) sip() {
 	this.drinklevel = this.drinklevel - this.drinkspeed
 }
 
+func (this *group) sip() {
+	for idx := range this.members {
+		this.members[idx].sip()
+	}
+}
+
+
 func main (){
-	fmt.Println("Let's simulate a bar")
-
-
 	// let's instantiate a group, one person will buy a round, at which
 	// point everyone's drink level starts dropping,
 	// When the person whose turn it is to buy a round has his drink level drop to zero
@@ -46,8 +50,6 @@ func main (){
 	}
 
 	new_group := group{pubgoers,0}
-	fmt.Println(new_group)
-
 
 	// make some bartenders
 	bartenders := make([]bartender, 3, 10)
@@ -55,11 +57,12 @@ func main (){
 		bartenders[i] = bartender{}
 	}
 	// now make a pub
-	new_pub := pub{[]group{new_group}, bartenders}
-	fmt.Println(new_pub)
+	//new_pub := pub{[]group{new_group}, bartenders}
 
 	drinker := pubgoer{0.9, 0.2}
-	fmt.Println(drinker.drinklevel)
 	drinker.sip()
-	fmt.Println(drinker.drinklevel)
+
+	fmt.Println(new_group)
+	new_group.sip()
+	fmt.Println(new_group)
 }
